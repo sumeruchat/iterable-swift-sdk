@@ -8,21 +8,6 @@ import UIKit
 
 @objc final class IterableUtil: NSObject {
     static var rootViewController: UIViewController? {
-        if #available(iOS 13.0, *) {
-            // Modern scene-based approach for multi-window support
-            for scene in UIApplication.shared.connectedScenes {
-                if let windowScene = scene as? UIWindowScene {
-                    for window in windowScene.windows {
-                        if window.isKeyWindow {
-                            return window.rootViewController
-                        }
-                    }
-                }
-            }
-            // If no key window found, fallback to legacy approach
-        }
-        
-        // Legacy approach for iOS 12 and below, or fallback
         if let rootViewController = AppExtensionHelper.application?.delegate?.window??.rootViewController {
             return rootViewController
         } else {
